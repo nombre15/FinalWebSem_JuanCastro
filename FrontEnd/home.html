@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es" prefix="schema: http://schema.org/">
+
+<head>
+    <meta charset="UTF-8">
+    <title>TechFix - Reparación de Dispositivos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body vocab="http://schema.org/" typeof="LocalBusiness">
+
+    <header>
+        <h1 property="name">TechFix</h1>
+        <p property="description">Soluciones rápidas para tus dispositivos electrónicos</p>
+    </header>
+
+    <main>
+        <section typeof="Service">
+            <h2>Solicita un Servicio</h2>
+            <form id="solicitudForm">
+                <label for="nombre">Tu nombre (cliente):</label><br>
+                <input type="text" id="nombre" required property="provider"><br><br>
+
+                <label for="problema">Describe el problema:</label><br>
+                <textarea id="problema" rows="3" required property="description"></textarea><br><br>
+
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>Chat de Asistencia</h2>
+            <div class="chat-box" id="chatBox" typeof="InteractionCounter">
+                <!-- Mensajes -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 <span property="name">TechFix</span> - Todos los derechos reservados</p>
+        <meta property="addressLocality" content="Medellín">
+        <meta property="areaServed" content="Colombia">
+    </footer>
+
+    <script>
+        const form = document.getElementById("solicitudForm");
+        const chatBox = document.getElementById("chatBox");
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const nombre = document.getElementById("nombre").value;
+            const problema = document.getElementById("problema").value;
+
+            // Cliente
+            addMessage(`${nombre}: Tengo un problema con mi dispositivo. ${problema}`, "client");
+
+            // Agente virtual
+            setTimeout(() => {
+                addMessage("Agente virtual: Gracias por tu solicitud. Buscando técnico disponible...", "agent");
+
+                // Técnico
+                setTimeout(() => {
+                    addMessage("Técnico: ¡Hola! Revisaré tu solicitud y te contactaré pronto.", "tech");
+                }, 4000);
+            }, 2000);
+        });
+
+        function addMessage(text, role) {
+            const msg = document.createElement("div");
+            msg.className = `message ${role}`;
+            msg.textContent = text;
+            chatBox.appendChild(msg);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+
+</body>
+
+</html>

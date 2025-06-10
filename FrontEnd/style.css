@@ -1,0 +1,130 @@
+:root {
+  --primary-color: #0b5ed7;
+  --secondary-color: #f8f9fa;
+  --background-color: #eef2f5;
+  --text-color: #333;
+  --white: #ffffff;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --radius: 12px;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+header,
+footer {
+  background-color: var(--primary-color);
+  color: var(--white);
+  text-align: center;
+  padding: 1.5rem 1rem;
+}
+
+header h1,
+footer p {
+  margin: 0;
+}
+
+main {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+section {
+  margin-bottom: 2rem;
+}
+
+h2 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+form {
+  background-color: var(--white);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+form input,
+form textarea,
+form button {
+  font-size: 1rem;
+  padding: 0.75rem;
+  border-radius: var(--radius);
+  border: 1px solid #ccc;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+form input:focus,
+form textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+form button {
+  background-color: var(--primary-color);
+  color: var(--white);
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+form button:hover {
+  background-color: #0946a1;
+}
+
+.chat-box {
+  background-color: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  max-height: 300px;
+  overflow-y: auto;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.message {
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: var(--radius);
+  max-width: 80%;
+  clear: both;
+}
+
+.client {
+  background-color: #dbeafe;
+  align-self: flex-start;
+}
+
+.agent {
+  background-color: #d1fae5;
+  align-self: flex-start;
+}
+
+.tech {
+  background-color: #fff7cd;
+  align-self: flex-start;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  main {
+    padding: 0 1rem;
+  }
+
+  .chat-box {
+    font-size: 0.9rem;
+  }
+}
