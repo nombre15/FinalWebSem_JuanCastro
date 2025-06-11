@@ -21,9 +21,15 @@
             <form id="solicitudForm">
                 <label for="nombre">Tu nombre (cliente):</label><br>
                 <input type="text" id="nombre" required property="provider"><br><br>
+                
+                <label for="servicio">Selecciona un servicio:</label><br>
+                <select id="servicio" name="servicio" required property="serviceType">
+                <!-- Servicios -->
+                </select><br><br>
 
-                <label for="problema">Describe el problema:</label><br>
-                <textarea id="problema" rows="3" required property="description"></textarea><br><br>
+                <label for="problema">Describe tu problema:</label><br>
+                <textarea id="problema" name="problema" required></textarea><br><br>
+
 
                 <button type="submit">Enviar</button>
             </form>
@@ -73,8 +79,33 @@
             chatBox.appendChild(msg);
             chatBox.scrollTop = chatBox.scrollHeight;
         }
+
+        // Cargar servicios desde el backend al cargar la página
+        window.addEventListener("DOMContentLoaded", async () => {
+            const servicioSelect = document.getElementById("servicio");
+
+            try {
+                const response = await fetch("/getServicios");
+                const servicios = await response.json();
+
+                console.log("Servicios recibidos:", servicios);
+
+                servicios.forEach(servicio => {
+                    const option = document.createElement("option");
+                    option.value = servicio._id;
+                    option.textContent = `${servicio.nombre} - $${servicio.costo} (${servicio.categoria})`;
+                    servicioSelect.appendChild(option);
+                });
+
+            } catch (error) {
+                console.error("No se pudieron cargar los servicios:", error);
+                const option = document.createElement("option");
+                option.textContent = "No se pudieron cargar los servicios";
+                option.disabled = true;
+                servicioSelect.appendChild(option);
+            }
+        });
     </script>
 
 </body>
-
 </html>
