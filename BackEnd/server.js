@@ -1,8 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
-const uri = 'mongodb+srv://juancastro82211:beeKHg83pCzo3VBf@websem.honqufu.mongodb.net/';
+const uri = 'mongodb+srv://juancastro82211:beeKHg83pCzo3VBf@websem.honqufu.mongodb.net/WebSem';
 const path = require('path');
+const router =require('./routes/router.js');
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
@@ -24,16 +25,12 @@ function connect() {
 
 connect();
 
-// Middleware to parse JSON
 app.use(express.json());
 
-// Sample route
-app.get('/', (req, res) => {
-  res.send('API is working');
-});
+app.use(express.static(path.join(__dirname, '..', 'FrontEnd')));
 
-const proyectPath = path.resolve(__dirname, '../frontend');
-app.use(express.static(path.resolve(proyectPath)));
-
-const router =require('./routes/router.js');
 app.use('/', router);
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'FrontEnd', 'home.html'));
+});
